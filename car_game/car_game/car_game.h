@@ -1,4 +1,4 @@
-// car_game.h
+
 #ifndef CAR_GAME_H
 #define CAR_GAME_H
 
@@ -11,7 +11,7 @@
 
 class TwoLaneCarGame {
 public:
-    TwoLaneCarGame(const std::string& user);
+	TwoLaneCarGame(const std::string& user); // Constructor to initialize the game with a username
     void run();
 
 private:
