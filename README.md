@@ -36,6 +36,16 @@ Refactor: Centralized constants and added essential headers
 - Included required headers: <conio.h>, <fstream>, <sstream>, <iomanip>, <cstdlib>, etc.
 - This setup ensures consistent and reusable configuration across the game files
 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Name:Arman/Date:2025-07-28
+chore: define core game state and Car struct
+
+- Added HANDLE and COORD for Windows console rendering
+- Defined screen buffer array for full-screen ASCII output
+- Created Car struct to represent enemy and player cars
+- Initialized game state variables: score, timers, difficulty, etc.
+- Set up RNG and timing logic for spawning and game progression
 
 
 
