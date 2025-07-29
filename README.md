@@ -36,6 +36,7 @@ Refactor: Centralized constants and added essential headers
 - Included required headers: <conio.h>, <fstream>, <sstream>, <iomanip>, <cstdlib>, etc.
 - This setup ensures consistent and reusable configuration across the game files
 
+File: car_game.h
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Name:Arman/Date:2025-07-28
@@ -47,5 +48,29 @@ chore: define core game state and Car struct
 - Initialized game state variables: score, timers, difficulty, etc.
 - Set up RNG and timing logic for spawning and game progression
 
+File: car_game.h
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Name:Fenish/Date:2025-07-29
+
+- Added Utility function into header file
+  
+File: car_game.h
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Name:Fenish/Date:2025-07-29
+add constructors and initialize console, screen buffer, and timing
+
+  - Implement Car ctor (lane, y, active=true)
+  - Implement TwoLaneCarGame ctor:
+  - Seed RNG and set defaults (score=0, difficulty=1, baseSpawnDelay=2000, roadLineOffset=0)
+  - Initialize screen buffer and null-terminate each row
+  - Configure Windows console: fullscreen mode, buffer size, window size
+  - Hide cursor for cleaner render
+  - Precompute road divider lines (every 4 rows)
+  - Set timing anchors (lastUpdate, lastEnemySpawn, gameStartTime)
+  - Position player car at left lane near bottom"
+
+File: car_game.cpp
 
 
