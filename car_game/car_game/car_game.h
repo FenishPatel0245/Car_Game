@@ -79,5 +79,7 @@ public:
     
 };
 
+// Utility function
+std::string getUsername();
 
 #endif // CAR_GAME_H
