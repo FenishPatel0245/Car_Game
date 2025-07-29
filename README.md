@@ -26,3 +26,16 @@ Prepares the project for modular compilation and team-based development.
 File: car_game.h
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Name:Pratham/Date:2025-07-28 :
+Refactor: Centralized constants and added essential headers
+
+- Moved all game dimension and lane-related constants into one place:
+  SCREEN_WIDTH, SCREEN_HEIGHT, PANEL_WIDTH, LANE_WIDTH, etc.
+- Defined NOMINMAX to prevent macro conflicts with min/max in <windows.h>
+- Included required headers: <conio.h>, <fstream>, <sstream>, <iomanip>, <cstdlib>, etc.
+- This setup ensures consistent and reusable configuration across the game files
+
+
+
+
