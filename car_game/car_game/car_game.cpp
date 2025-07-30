@@ -82,3 +82,84 @@ TwoLaneCarGame::TwoLaneCarGame(const std::string& user)
     lastEnemySpawn = std::chrono::steady_clock::now();
     gameStartTime = std::chrono::steady_clock::now();
 }
+
+void TwoLaneCarGame::clearScreen()
+{
+    for (int y = 0; y < SCREEN_HEIGHT; ++y)
+    {
+        for (int x = 0; x < SCREEN_WIDTH; ++x)
+        {
+            screen[y][x] = ' ';
+        }
+        // Null-terminate each row so it can be safely printed as a C-string
+        screen[y][SCREEN_WIDTH] = '\0';
+    }
+}
+
+void TwoLaneCarGame::drawBackground()
+{
+    // Iterate over every row of the screen
+    for (int y = 0; y < SCREEN_HEIGHT; ++y)
+    {
+        // -------------------------------
+        // LEFT PANEL (UI Panel on the left)
+        // -------------------------------
+        for (int x = 0; x < LEFT_PANEL_WIDTH; ++x)
+        {
+            if (x == LEFT_PANEL_WIDTH - 1)
+            {
+                // Draw vertical border of the left panel
+                screen[y][x] = '|';
+            }
+            else if ((x + y) % 2 == 0)
+            {
+                // Add a dotted pattern
+                screen[y][x] = '.';
+            }
+            else
+            {
+                // Fill with spaces
+                screen[y][x] = ' ';
+            }
+        }
+
+        // -------------------------------
+        // ROAD SECTION (between panels)
+        // -------------------------------
+        for (int x = ROAD_LEFT; x < ROAD_RIGHT; ++x)
+        {
+            if (x == ROAD_LEFT + LANE_WIDTH)
+            {
+                // Draw lane divider line
+                screen[y][x] = '|';
+            }
+            else
+            {
+                // Clear road space
+                screen[y][x] = ' ';
+            }
+        }
+
+        // -------------------------------
+        // RIGHT PANEL (UI Panel on the right)
+        // -------------------------------
+        for (int x = ROAD_RIGHT; x < SCREEN_WIDTH; ++x)
+        {
+            if (x == ROAD_RIGHT)
+            {
+                // Draw vertical border of the right panel
+                screen[y][x] = '|';
+            }
+            else if ((x + y) % 2 == 0)
+            {
+                // Add a dotted pattern
+                screen[y][x] = '.';
+            }
+            else
+            {
+                // Fill with spaces
+                screen[y][x] = ' ';
+            }
+        }
+    }
+}
