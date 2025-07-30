@@ -73,4 +73,14 @@ add constructors and initialize console, screen buffer, and timing
 
 File: car_game.cpp
 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+Name:Darshita/Date:2025-07-29
+
+implement screen clear and background rendering (panels + lane divider)
+
+- clearScreen(): fill screen buffer with spaces and null-terminate each row for safe C-string output
+- drawBackground(): render left/right UI panels with dotted pattern and vertical borders
+- drawBackground(): render road area with a central lane divider between panels"
+
+File: car_game.cpp
