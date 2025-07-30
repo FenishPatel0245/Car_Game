@@ -4,9 +4,7 @@
 // Car constructor
 // ---------------------------
 TwoLaneCarGame::Car::Car(int pLane, int py)
-    : lane(pLane),
-    y(py),
-    active(true)   // Car is active by default
+    : lane(pLane), y(py), active(true)
 {
 }
 
@@ -14,65 +12,73 @@ TwoLaneCarGame::Car::Car(int pLane, int py)
 // TwoLaneCarGame constructor
 // ---------------------------
 TwoLaneCarGame::TwoLaneCarGame(const std::string& user)
-    : playerCar(0, SCREEN_HEIGHT - 8),           // Player car starts in left lane, near bottom
+    : playerCar(0, SCREEN_HEIGHT - 8),
     score(0),
     gameOver(false),
-    rng(static_cast<unsigned int>(std::chrono::steady_clock::now().time_since_epoch().count())),  // Random seed
+    rng(static_cast<unsigned int>(
+        std::chrono::steady_clock::now().time_since_epoch().count())),
     roadLineOffset(0),
     username(user),
     difficultyLevel(1),
-    baseSpawnDelay(2000)                       // Enemy spawn delay in milliseconds
+    baseSpawnDelay(2000)
 {
-    // --------------------------------------------------
-    // Initialize the screen buffer with empty spaces
-    // --------------------------------------------------
-    for (int y = 0; y < SCREEN_HEIGHT; y++)
+    // ---------------------------------------------
+    // Initialize the screen buffer with spaces
+    // and null-terminate each row for safe printing
+    // ---------------------------------------------
+    for (int y = 0; y < SCREEN_HEIGHT; ++y)
     {
-        for (int x = 0; x < SCREEN_WIDTH; x++)
+        for (int x = 0; x < SCREEN_WIDTH; ++x)
         {
-            screen[y][x] = ' ';   // Fill screen with blank spaces
+            screen[y][x] = ' ';
         }
-        screen[y][SCREEN_WIDTH] = '\0';  // Null-terminate each line
+        screen[y][SCREEN_WIDTH] = '\0';
     }
 
-    // --------------------------------------------------
-    // Setup the console for fullscreen rendering
-    // --------------------------------------------------
-    hConsole = GetStdHandle(STD_OUTPUT_HANDLE);  // Get console handle
+    // ---------------------------------------------
+    // Console setup (Windows API)
+    // ---------------------------------------------
+    hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     dwCursorPosition.X = 0;
     dwCursorPosition.Y = 0;
 
-    // Switch console to fullscreen mode
-    SetConsoleDisplayMode(hConsole, CONSOLE_FULLSCREEN_MODE, 0);
+    // Fullscreen display mode (3rd param is an optional out pointer)
+    SetConsoleDisplayMode(hConsole, CONSOLE_FULLSCREEN_MODE, nullptr);
 
-    // Configure buffer size (so screen fits the window)
-    COORD bufferSize = { SCREEN_WIDTH, SCREEN_HEIGHT };
+    // Match buffer to desired game resolution
+    COORD bufferSize = {
+        static_cast<SHORT>(SCREEN_WIDTH),
+        static_cast<SHORT>(SCREEN_HEIGHT)
+    };
     SetConsoleScreenBufferSize(hConsole, bufferSize);
 
-    // Set window size to match buffer
-    SMALL_RECT windowSize = { 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1 };
+    // Match window to buffer
+    SMALL_RECT windowSize = {
+        0,
+        0,
+        static_cast<SHORT>(SCREEN_WIDTH - 1),
+        static_cast<SHORT>(SCREEN_HEIGHT - 1)
+    };
     SetConsoleWindowInfo(hConsole, TRUE, &windowSize);
 
-    // --------------------------------------------------
-    // Hide the console cursor for a cleaner game screen
-    // --------------------------------------------------
+    // Hide the blinking cursor for a cleaner look
     CONSOLE_CURSOR_INFO cursorInfo;
     GetConsoleCursorInfo(hConsole, &cursorInfo);
-    cursorInfo.bVisible = false;                 // Hide cursor
+    cursorInfo.bVisible = FALSE;
     SetConsoleCursorInfo(hConsole, &cursorInfo);
 
-    // --------------------------------------------------
-    // Initialize the road divider lines (every 4 rows)
-    // --------------------------------------------------
-    for (int i = 0; i < 20; i++)
+    // ---------------------------------------------
+    // Initialize road divider positions (every 4 rows)
+    // ---------------------------------------------
+    for (int i = 0; i < 20; ++i)
     {
-        roadLines.push_back(i * 4);   // Each divider appears 4 rows apart
+        roadLines.push_back(i * 4);
     }
 
-    // --------------------------------------------------
-    // Set up timing anchors for game loop
-    // --------------------------------------------------
-    lastUpdate = std::chrono::steady_clock::now();     // Last frame update time
-    lastEnemySpawn = std::chrono::steady_clock::now(); // Last enemy spawn time
-    gameStartTime = std::chrono::steady_clock::now();  // Game start time (used for difficulty)
+    // ---------------------------------------------
+    // Timing anchors for game loop and events
+    // ---------------------------------------------
+    lastUpdate = std::chrono::steady_clock::now();
+    lastEnemySpawn = std::chrono::steady_clock::now();
+    gameStartTime = std::chrono::steady_clock::now();
 }
