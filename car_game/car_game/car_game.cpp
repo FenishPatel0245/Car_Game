@@ -431,3 +431,140 @@ void TwoLaneCarGame::render()
 
     std::cout.flush();
 }
+void TwoLaneCarGame::handleInput()
+{
+    if (_kbhit())
+    {
+        int key = _getch();
+
+        // Handle extended / special keys (arrows, etc.)
+        if (key == 224 || key == 0)
+        {
+            int specialKey = _getch();
+
+            if (!gameOver)
+            {
+                if (specialKey == 75) // Left Arrow
+                {
+                    playerCar.lane = 0;
+                }
+                else if (specialKey == 77) // Right Arrow
+                {
+                    playerCar.lane = 1;
+                }
+            }
+        }
+        else
+        {
+            // Normalize uppercase letters to lowercase
+            if (key >= 'A' && key <= 'Z')
+            {
+                key = key + ('a' - 'A');
+            }
+
+            if (!gameOver)
+            {
+                if (key == 'a')
+                {
+                    playerCar.lane = 0;
+                }
+                else if (key == 'd')
+                {
+                    playerCar.lane = 1;
+                }
+                else if (key == 27) // ESC
+                {
+                    saveScore();
+                    showLeaderboard();
+                    exit(0);
+                }
+            }
+            else
+            {
+                if (key == 'r')
+                {
+                    saveScore();
+                    showLeaderboard();
+                    restart();
+                }
+                else if (key == 27) // ESC
+                {
+                    saveScore();
+                    showLeaderboard();
+                    exit(0);
+                }
+            }
+        }
+    }
+}
+void TwoLaneCarGame::updateGame()
+{
+    auto now = std::chrono::steady_clock::now();
+    auto deltaTime = std::chrono::duration_cast<std::chrono::milliseconds>(now - lastUpdate);
+    auto gameTime = std::chrono::duration_cast<std::chrono::seconds>(now - gameStartTime);
+
+    // Increase difficulty every 25 seconds
+    int newDifficulty = (static_cast<int>(gameTime.count()) / 25) + 1;
+    if (newDifficulty > difficultyLevel)
+    {
+        difficultyLevel = newDifficulty;
+    }
+
+    // Game speed decreases as score/difficulty rise, but not below 30 ms per tick
+    int gameSpeed = std::max(30, 150 - (score / 50) - (difficultyLevel * 10));
+    if (deltaTime.count() < gameSpeed)
+    {
+        return;
+    }
+
+    lastUpdate = now;
+
+    if (gameOver)
+    {
+        return;
+    }
+
+    // Scroll road lines
+    roadLineOffset = (roadLineOffset + 1) % (SCREEN_HEIGHT * 2);
+
+    // Move enemy cars downward; despawn when off-screen; award score
+    for (auto& car : enemyCars)
+    {
+        if (car.active)
+        {
+            car.y += 1;
+
+            if (car.y > SCREEN_HEIGHT + 2)
+            {
+                car.active = false;
+                score += 10;
+            }
+        }
+    }
+
+    // Remove inactive cars
+    enemyCars.erase(
+        std::remove_if(
+            enemyCars.begin(),
+            enemyCars.end(),
+            [](const Car& c)
+            {
+                return !c.active;
+            }),
+        enemyCars.end()
+    );
+
+    // Spawn new enemy car based on dynamic spawn delay
+    auto spawnTime = std::chrono::duration_cast<std::chrono::milliseconds>(now - lastEnemySpawn);
+    int  spawnDelay = std::max(200, baseSpawnDelay - (score / 20) - (difficultyLevel * 100));
+
+    if (spawnTime.count() > spawnDelay)
+    {
+        spawnEnemyCar();
+        lastEnemySpawn = now;
+    }
+
+    // Collision check and passive score gain
+    checkCollisions();
+    score += 1;
+}
