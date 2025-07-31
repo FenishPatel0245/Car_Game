@@ -251,3 +251,43 @@ void TwoLaneCarGame::drawRoadLines()
         }
     }
 }
+
+void TwoLaneCarGame::drawGameOver()
+{
+    // Center of the screen
+    int centerX = SCREEN_WIDTH / 2;
+    int centerY = SCREEN_HEIGHT / 2;
+
+    // Lines to display in the game-over overlay
+    std::vector<std::string> text = {
+        "GAME OVER",
+        "",
+        "Cars Collided!",
+        "",
+        "Final Score: " + std::to_string(score),
+        "",
+        "Press R to Restart",
+        "Press ESC to Exit"
+    };
+
+    // Render each line centered horizontally, and vertically around centerY
+    for (size_t i = 0; i < text.size(); ++i)
+    {
+        int startX = centerX - static_cast<int>(text[i].length()) / 2;
+        int y = centerY - static_cast<int>(text.size()) / 2 + static_cast<int>(i);
+
+        if (y >= 0 && y < SCREEN_HEIGHT)
+        {
+            for (size_t j = 0; j < text[i].length(); ++j)
+            {
+                int x = startX + static_cast<int>(j);
+
+                // Keep the text inside the road area
+                if (x >= ROAD_LEFT && x < ROAD_RIGHT)
+                {
+                    screen[y][x] = text[i][j];
+                }
+            }
+        }
+    }
+}
