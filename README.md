@@ -84,3 +84,22 @@ implement screen clear and background rendering (panels + lane divider)
 - drawBackground(): render road area with a central lane divider between panels"
 
 File: car_game.cpp
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Name:Pratham/Date:2025-07-30
+
+render dashed lane divider and panel UI text
+
+- drawRoadLines(): animate center lane using roadLines + roadLineOffset
+  - Wrap over 2× screen height for longer cycle
+  - Skip every 3rd row to create dashed effect
+- drawUI(): populate left/right panels without touching borders
+  - Left: Game, Score, Time (since start), Level, controls, restart/exit
+  - Right: control hints and difficulty tip (“every 25s!”)
+  - Respect LEFT_PANEL_WIDTH/RIGHT_PANEL_WIDTH bounds and ROAD_RIGHT offset"
+
+File: car_game.cpp
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
