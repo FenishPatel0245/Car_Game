@@ -103,3 +103,15 @@ File: car_game.cpp
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+Name:Arman/Date:2025-07-30
+
+add centered game over overlay with final score and restart/exit instructions
+
+- drawGameOver(): renders an 8-line overlay at the screen center
+  - Displays \"GAME OVER\", \"Cars Collided!\", and the player's final score
+  - Includes instructions: press R to restart or ESC to exit
+  - Horizontally centers each line and keeps text within the ROAD_LEFT/ROAD_RIGHT bounds"
+ 
+    File: car_game.cpp
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
