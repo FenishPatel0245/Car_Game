@@ -400,3 +400,34 @@ void TwoLaneCarGame::drawEnemyCars()
         }
     }
 }
+void TwoLaneCarGame::render()
+{
+    clearScreen();
+    drawBackground();
+    drawUI();
+
+    if (!gameOver)
+    {
+        drawRoadLines();
+        drawPlayerCar();
+        drawEnemyCars();
+    }
+    else
+    {
+        drawGameOver();
+    }
+
+    // Move the console cursor to the top-left before printing the buffer
+    SetConsoleCursorPosition(hConsole, dwCursorPosition);
+
+    for (int y = 0; y < SCREEN_HEIGHT; ++y)
+    {
+        std::cout << screen[y];
+        if (y < SCREEN_HEIGHT - 1)
+        {
+            std::cout << '\n';
+        }
+    }
+
+    std::cout.flush();
+}
