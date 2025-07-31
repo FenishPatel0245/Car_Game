@@ -291,3 +291,10 @@ void TwoLaneCarGame::drawGameOver()
         }
     }
 }
+
+int TwoLaneCarGame::getLaneX(int lane)
+{
+    return (lane == 0)
+        ? LEFT_LANE_CENTER - 1
+        : RIGHT_LANE_CENTER - 1;
+}
