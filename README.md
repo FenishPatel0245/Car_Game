@@ -108,10 +108,23 @@ Name:Arman/Date:2025-07-30
 add centered game over overlay with final score and restart/exit instructions
 
 - drawGameOver(): renders an 8-line overlay at the screen center
-  - Displays \"GAME OVER\", \"Cars Collided!\", and the player's final score
-  - Includes instructions: press R to restart or ESC to exit
-  - Horizontally centers each line and keeps text within the ROAD_LEFT/ROAD_RIGHT bounds"
+- Displays \"GAME OVER\", \"Cars Collided!\", and the player's final score
+- Includes instructions: press R to restart or ESC to exit
+- Horizontally centers each line and keeps text within the ROAD_LEFT/ROAD_RIGHT bounds"
  
     File: car_game.cpp
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Name:Arman/Date:2025-07-30
+
+add getLaneX() helper to calculate car's X position
+
+- Returns horizontal center position for a given lane index
+- Lane 0: LEFT_LANE_CENTER - 1
+- Lane 1: RIGHT_LANE_CENTER - 1
+- Used by player and enemy car drawing functions for consistent placement
+
+File: car_game.cpp
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------  
