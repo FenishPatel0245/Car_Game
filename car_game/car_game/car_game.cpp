@@ -163,3 +163,91 @@ void TwoLaneCarGame::drawBackground()
         }
     }
 }
+void TwoLaneCarGame::drawUI()
+{
+    // Compute elapsed game time in seconds
+    auto now = std::chrono::steady_clock::now();
+    auto gameTime = std::chrono::duration_cast<std::chrono::seconds>(now - gameStartTime);
+    int seconds = static_cast<int>(gameTime.count());
+
+    // -------------------------------
+    // LEFT PANEL TEXT (row -> text)
+    // -------------------------------
+    std::vector<std::pair<int, std::string>> leftTexts = {
+        {  1, "Game" },
+        {  3, "Score: " + std::to_string(score) },
+        {  5, "Time: " + std::to_string(seconds) + "s" },
+        {  7, "Level: " + std::to_string(difficultyLevel) },
+        {  9, "Control" },
+        { 11, "Left" },
+        { 12, "Right" },
+        { 15, "ESC - Exit" },
+        { 16, "R - Restart" }
+    };
+
+    // Render left panel lines inside the left panel width
+    for (const auto& text : leftTexts)
+    {
+        int row = text.first;
+        if (row < SCREEN_HEIGHT)
+        {
+            for (int i = 0;
+                i < static_cast<int>(text.second.length()) && i < LEFT_PANEL_WIDTH - 2;
+                ++i)
+            {
+                // Offset by 1 to avoid overwriting the panel border at x == 0
+                screen[row][i + 1] = text.second[i];
+            }
+        }
+    }
+
+    // -------------------------------
+    // RIGHT PANEL TEXT (row -> text)
+    // -------------------------------
+    std::vector<std::pair<int, std::string>> rightTexts = {
+        {  1, "Car" },
+        {  3, "Score" },
+        {  5, "Control" },
+        {  7, "A Key -" },
+        {  8, "D Key -" },
+        { 10, "Avoid cars" },
+        { 11, "by switching" },
+        { 12, "lanes!" },
+        { 15, "Speed up" },
+        { 16, "every 25s!" }
+    };
+
+    // Render right panel lines starting just to the right of ROAD_RIGHT border
+    for (const auto& text : rightTexts)
+    {
+        int row = text.first;
+        if (row < SCREEN_HEIGHT)
+        {
+            for (int i = 0;
+                i < static_cast<int>(text.second.length()) && i < RIGHT_PANEL_WIDTH - 2;
+                ++i)
+            {
+                // Start at ROAD_RIGHT + 1 to keep the road/panel border intact
+                screen[row][ROAD_RIGHT + 1 + i] = text.second[i];
+            }
+        }
+    }
+}
+void TwoLaneCarGame::drawRoadLines()
+{
+    // Center lane divider column
+    int centerX = ROAD_LEFT + LANE_WIDTH;
+
+    // Animate dashed lane divider using roadLines and roadLineOffset
+    for (size_t i = 0; i < roadLines.size(); ++i)
+    {
+        // Wrap pattern over twice the screen height for a longer cycle
+        int lineY = (roadLines[i] + roadLineOffset) % (SCREEN_HEIGHT * 2);
+
+        // Only draw visible rows, skip every 3rd row to make it dashed
+        if (lineY >= 0 && lineY < SCREEN_HEIGHT && lineY % 3 != 0)
+        {
+            screen[lineY][centerX] = ':';
+        }
+    }
+}
