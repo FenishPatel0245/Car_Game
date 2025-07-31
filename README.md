@@ -129,7 +129,7 @@ File: car_game.cpp
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------  
 
-Name:Darshita/Date:2025-07-28 :
+Name:Darshita/Date:2025-07-30 :
 
 render ASCII sprites for player and enemy cars
 
@@ -145,6 +145,20 @@ render ASCII sprites for player and enemy cars
      ** 
   - Draws only when active and within visible screen rows"
  
+File: car_game.cpp
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Name:Pratham/Date:2025-07-30 :
+
+add full render pipeline with screen buffer flush
+
+- Clears buffer, draws background and UI each frame
+- When running: draws road lines, player car, and enemy cars
+- When game over: draws centered game-over overlay
+- Resets cursor to (0,0) with SetConsoleCursorPosition
+- Prints each row of the char buffer and flushes output to update the console
+
 File: car_game.cpp
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
