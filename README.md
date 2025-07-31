@@ -162,3 +162,21 @@ add full render pipeline with screen buffer flush
 File: car_game.cpp
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Name:Fenish/Date:2025-07-30 :
+
+add update loop (timing, spawn, collisions) and input handling
+
+- updateGame():
+  - Scale difficulty every 25s and compute dynamic tick speed
+  - Scroll road lines and move/despawn enemies; award points
+  - Dynamic enemy spawn using baseSpawnDelay, score, and difficulty
+  - Collision detection and passive score increment
+- handleInput():
+  - Support A/D and ←/→ for lane switching
+  - ESC saves score, shows leaderboard, and exits
+  - 'r' (on game over) saves score, shows leaderboard, and restarts
+  - Normalizes uppercase keys
+
+    File: car_game.cpp
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
