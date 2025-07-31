@@ -298,3 +298,105 @@ int TwoLaneCarGame::getLaneX(int lane)
         ? LEFT_LANE_CENTER - 1
         : RIGHT_LANE_CENTER - 1;
 }
+
+void TwoLaneCarGame::drawPlayerCar()
+{
+    if (!gameOver)
+    {
+        int x = getLaneX(playerCar.lane);
+        int y = playerCar.y;
+
+        // Draw the exact car design:
+        //   0=[_]=0
+        //     /|\
+        //    |(o)|
+        //   []=V=[]
+        //      v
+        if (y >= 0 && y + 5 < SCREEN_HEIGHT)
+        {
+            // Row 1: "0=[_]=0"  (7 chars: x-3 .. x+3)
+            if (x - 3 >= ROAD_LEFT && x + 3 < ROAD_RIGHT)
+            {
+                screen[y][x - 3] = '0';
+                screen[y][x - 2] = '=';
+                screen[y][x - 1] = '[';
+                screen[y][x + 0] = '_';
+                screen[y][x + 1] = ']';
+                screen[y][x + 2] = '=';
+                screen[y][x + 3] = '0';
+            }
+
+            // Row 2: "/|\"
+            if (x - 1 >= ROAD_LEFT && x + 1 < ROAD_RIGHT)
+            {
+                screen[y + 1][x - 1] = '/';
+                screen[y + 1][x + 0] = '|';
+                screen[y + 1][x + 1] = '\\';
+            }
+
+            // Row 3: "|(o)|"
+            if (x - 2 >= ROAD_LEFT && x + 2 < ROAD_RIGHT)
+            {
+                screen[y + 2][x - 2] = '|';
+                screen[y + 2][x - 1] = '(';
+                screen[y + 2][x + 0] = 'o';
+                screen[y + 2][x + 1] = ')';
+                screen[y + 2][x + 2] = '|';
+            }
+
+            // Row 4: "[]=V=[]"  (7 chars: x-3 .. x+3)
+            if (x - 3 >= ROAD_LEFT && x + 3 < ROAD_RIGHT)
+            {
+                screen[y + 3][x - 3] = '[';
+                screen[y + 3][x - 2] = ']';
+                screen[y + 3][x - 1] = '=';
+                screen[y + 3][x + 0] = 'V';
+                screen[y + 3][x + 1] = '=';
+                screen[y + 3][x + 2] = '[';
+                screen[y + 3][x + 3] = ']';
+            }
+
+            // Row 5: "v" - centered
+            if (x >= ROAD_LEFT && x < ROAD_RIGHT)
+            {
+                screen[y + 4][x] = 'v';
+            }
+        }
+    }
+}
+
+void TwoLaneCarGame::drawEnemyCars()
+{
+    for (const auto& car : enemyCars)
+    {
+        if (car.active && car.y >= -2 && car.y < SCREEN_HEIGHT)
+        {
+            int x = getLaneX(car.lane);
+            int y = car.y;
+
+            if (y >= 0 && y + 3 < SCREEN_HEIGHT)
+            {
+                // A simple 4x4 star block car:
+                // ****
+                //  ** 
+                // ****
+                //  ** 
+                screen[y][x] = '*';
+                screen[y][x + 1] = '*';
+                screen[y][x + 2] = '*';
+                screen[y][x + 3] = '*';
+
+                screen[y + 1][x + 1] = '*';
+                screen[y + 1][x + 2] = '*';
+
+                screen[y + 2][x] = '*';
+                screen[y + 2][x + 1] = '*';
+                screen[y + 2][x + 2] = '*';
+                screen[y + 2][x + 3] = '*';
+
+                screen[y + 3][x + 1] = '*';
+                screen[y + 3][x + 2] = '*';
+            }
+        }
+    }
+}
