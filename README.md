@@ -128,3 +128,23 @@ add getLaneX() helper to calculate car's X position
 File: car_game.cpp
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------  
+
+Name:Darshita/Date:2025-07-28 :
+
+render ASCII sprites for player and enemy cars
+
+- drawPlayerCar(): draws a 5-row detailed ASCII car
+  - Rows include: \"0=[_]=0\", \"/|\\\", \"|(o)|\", \"[]=V=[]\", and a centered \"v\"
+  - Uses getLaneX() and bounds checks against ROAD_LEFT/ROAD_RIGHT
+  - Skips drawing when gameOver is true
+- drawEnemyCars(): renders a compact 4x4 star-block car
+  - Pattern:
+    ****
+     ** 
+    ****
+     ** 
+  - Draws only when active and within visible screen rows"
+ 
+File: car_game.cpp
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
