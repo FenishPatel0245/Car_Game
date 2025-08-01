@@ -205,3 +205,17 @@ add collision detection between player and enemy cars
 File: car_game.cpp
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Name:Darshita/Date:2025-07-31 :
+
+add leaderboard view for current user
+
+- Clears screen and prints username-scoped leaderboard header
+- Reads scores from <username>_scores.txt
+- Sorts in descending order and displays top 5 with alignment
+- Handles empty history with a friendly message
+- Waits for key press before returning
+
+File: car_game.cpp
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
