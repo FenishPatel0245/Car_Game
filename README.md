@@ -219,3 +219,15 @@ add leaderboard view for current user
 File: car_game.cpp
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Name:Fenish/Date:2025-07-30 :
+
+ add score persistence for current user
+
+- saveScore(): appends the current score to <username>_scores.txt
+- Opens file in append mode and writes one score per line
+- Closes file after successful write
+
+  File: car_game.cpp
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
