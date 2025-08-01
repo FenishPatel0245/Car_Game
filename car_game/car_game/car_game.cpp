@@ -584,3 +584,19 @@ void TwoLaneCarGame::spawnEnemyCar()
     // Spawn just above the visible screen (y = -2) so it scrolls in
     enemyCars.emplace_back(lane, -2);
 }
+
+void TwoLaneCarGame::checkCollisions()
+{
+    for (const auto& car : enemyCars)
+    {
+        // Check if the car is in the same lane and close vertically
+        if (car.active && car.lane == playerCar.lane)
+        {
+            if (abs(playerCar.y - car.y) < 3)
+            {
+                gameOver = true;  // Collision detected
+                break;
+            }
+        }
+    }
+}
