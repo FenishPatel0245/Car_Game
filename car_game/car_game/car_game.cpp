@@ -650,3 +650,15 @@ void TwoLaneCarGame::showLeaderboard()
     std::cout << std::endl << "Press any key to continue..." << std::endl;
     _getch();
 }
+void TwoLaneCarGame::saveScore()
+{
+    // Append the current score to the user's score file
+    std::string filename = username + "_scores.txt";
+    std::ofstream file(filename, std::ios::app);
+
+    if (file.is_open())
+    {
+        file << score << std::endl;
+        file.close();
+    }
+}
