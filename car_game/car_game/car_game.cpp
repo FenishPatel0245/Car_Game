@@ -568,3 +568,19 @@ void TwoLaneCarGame::updateGame()
     checkCollisions();
     score += 1;
 }
+void TwoLaneCarGame::spawnEnemyCar()
+{
+    // Randomly choose a lane: 0 (left) or 1 (right)
+    std::uniform_int_distribution<int> dist(0, 1);
+    int lane = dist(rng);
+
+    // 30% chance to mirror the player's current lane (adds challenge)
+    std::uniform_int_distribution<int> challengeDist(0, 100);
+    if (challengeDist(rng) < 30)
+    {
+        lane = playerCar.lane;
+    }
+
+    // Spawn just above the visible screen (y = -2) so it scrolls in
+    enemyCars.emplace_back(lane, -2);
+}
