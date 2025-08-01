@@ -231,3 +231,18 @@ Name:Fenish/Date:2025-07-30 :
   File: car_game.cpp
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Name:Darshita/Date:2025-08-01 :
+
+add main game loop and restart functionality
+
+- restart(): resets game state after game over
+  - Clears enemies, resets score, difficulty, and player position
+  - Resets timers for consistent timing on replay
+- run(): main game loop with input, update, and render cycle
+  - Runs continuously with 30ms delay per frame
+ 
+File: car_game.cpp
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
