@@ -600,3 +600,53 @@ void TwoLaneCarGame::checkCollisions()
         }
     }
 }
+void TwoLaneCarGame::showLeaderboard()
+{
+    // Clear console screen
+    system("cls");
+
+    // Header
+    std::cout << "=== LEADERBOARD FOR " << username << " ===" << std::endl;
+    std::cout << "=====================================" << std::endl << std::endl;
+
+    // Open the user's score file
+    std::string filename = username + "_scores.txt";
+    std::ifstream file(filename);
+    std::vector<int> scores;
+
+    if (file.is_open())
+    {
+        int score;
+        while (file >> score)
+        {
+            scores.push_back(score);
+        }
+        file.close();
+    }
+
+    // Display scores
+    if (scores.empty())
+    {
+        std::cout << "No previous scores found." << std::endl;
+    }
+    else
+    {
+        // Sort in descending order and show top 5
+        std::sort(scores.begin(), scores.end(), std::greater<int>());
+
+        std::cout << "Top 5 Highest Scores:" << std::endl;
+        std::cout << "=====================" << std::endl;
+
+        int displayCount = std::min(5, static_cast<int>(scores.size()));
+
+        for (int i = 0; i < displayCount; ++i)
+        {
+            std::cout << std::setw(2) << (i + 1) << ". "
+                << std::setw(8) << scores[i] << " points" << std::endl;
+        }
+    }
+
+    // Wait for user input before continuing
+    std::cout << std::endl << "Press any key to continue..." << std::endl;
+    _getch();
+}
