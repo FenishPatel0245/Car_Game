@@ -193,3 +193,15 @@ add enemy car spawn logic with random and challenge-based lane selection
 File: car_game.cpp
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Name:Arman/Date:2025-07-31 :
+
+add collision detection between player and enemy cars
+
+- Iterates active enemy cars and checks lane equality
+- Triggers gameOver when vertical distance to player is < 3
+- Early-exits loop after first detected collision
+
+File: car_game.cpp
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
