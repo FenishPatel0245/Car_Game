@@ -180,3 +180,16 @@ add update loop (timing, spawn, collisions) and input handling
     File: car_game.cpp
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Name:Pratham/Date:2025-07-31 :
+
+add enemy car spawn logic with random and challenge-based lane selection
+
+- Randomly selects lane (0 or 1) for new enemy car
+- 30% chance to match player's current lane for increased difficulty
+- Spawns enemy car just above screen at y = -2 for smooth entry
+- Uses uniform_int_distribution with Mersenne Twister RNG
+
+File: car_game.cpp
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
