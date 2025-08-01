@@ -246,3 +246,15 @@ File: car_game.cpp
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+Name:Fenish/Date:2025-07-31 :
+
+add username input prompt and cleanup
+
+- Displays game title and asks user for a name
+- Removes all non-alphanumeric characters from input
+- Defaults to \"Player\" if input is empty
+- Ensures username is safe for use in file naming (e.g., score file)
+
+File: main.cpp
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
