@@ -662,3 +662,28 @@ void TwoLaneCarGame::saveScore()
         file.close();
     }
 }
+void TwoLaneCarGame::restart()
+{
+    // Reset game state
+    gameOver = false;
+    score = 0;
+    enemyCars.clear();
+    playerCar.lane = 0;
+    roadLineOffset = 0;
+    difficultyLevel = 1;
+
+    // Reset timing anchors
+    lastUpdate = std::chrono::steady_clock::now();
+    lastEnemySpawn = std::chrono::steady_clock::now();
+    gameStartTime = std::chrono::steady_clock::now();
+}
+void TwoLaneCarGame::run()
+{
+    while (true)
+    {
+        handleInput();  // Process key input
+        updateGame();   // Update game logic
+        render();       // Draw frame
+        Sleep(30);      // Control loop timing (~30 FPS)
+    }
+}
