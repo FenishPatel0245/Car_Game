@@ -34,11 +34,11 @@ std::string getUsername()
     return username;
 }
 
-int main()
+int main() 
 {
     try
     {
-        std::string username = getUsername();
+		std::string username = getUsername(); // Get the username from the user
 
         // Welcome screen
         std::cout << std::endl;
@@ -66,15 +66,21 @@ int main()
         _getch();
 
         // Start the game
+
         TwoLaneCarGame game(username);
         game.run();
 
         return 0;
     }
+
+	// Catch any exceptions that may occur during game initialization or execution
+
     catch (const std::exception& e)
     {
         std::cerr << "Error: " << e.what() << std::endl;
         std::cout << "Press any key to exit..." << std::endl;
+
+		// _kbhit` and `_getch` are used to wait for user input
 
         if (_kbhit())
         {
