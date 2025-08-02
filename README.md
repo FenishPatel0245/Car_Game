@@ -246,7 +246,7 @@ File: car_game.cpp
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-Name:Fenish/Date:2025-07-31 :
+Name:Fenish/Date:2025-08-01 :
 
 add username input prompt and cleanup
 
@@ -258,3 +258,18 @@ add username input prompt and cleanup
 File: main.cpp
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Name:Arman/Date:2025-08-01 :
+
+add main entry point with intro screen, instructions, and safe startup
+
+- Prompts for and sanitizes username
+- Displays welcome message and game instructions
+- Waits for key press before entering fullscreen mode
+- Instantiates TwoLaneCarGame and runs game loop
+- Catches and reports exceptions with user-friendly exit prompt
+
+File: main.cpp
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
