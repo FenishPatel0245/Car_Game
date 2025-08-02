@@ -33,3 +33,55 @@ std::string getUsername()
 
     return username;
 }
+
+int main()
+{
+    try
+    {
+        std::string username = getUsername();
+
+        // Welcome screen
+        std::cout << std::endl;
+        std::cout << "Welcome, " << username << "!" << std::endl;
+        std::cout << std::endl;
+
+        // Game controls and instructions
+        std::cout << "Game Controls:" << std::endl;
+        std::cout << "A or Left Arrow  - Switch to Left Lane" << std::endl;
+        std::cout << "D or Right Arrow - Switch to Right Lane" << std::endl;
+        std::cout << "ESC - Exit Game" << std::endl;
+        std::cout << "R - Restart (when game over)" << std::endl;
+        std::cout << std::endl;
+        std::cout << "Objective: Avoid enemy cars by switching lanes!" << std::endl;
+        std::cout << "Difficulty increases every 25 seconds." << std::endl;
+        std::cout << std::endl;
+        std::cout << "The game will now switch to fullscreen mode." << std::endl;
+        std::cout << "Press any key to start..." << std::endl;
+
+        // Wait for key press
+        if (_kbhit())
+        {
+            _getch(); // Clear any buffered input
+        }
+        _getch();
+
+        // Start the game
+        TwoLaneCarGame game(username);
+        game.run();
+
+        return 0;
+    }
+    catch (const std::exception& e)
+    {
+        std::cerr << "Error: " << e.what() << std::endl;
+        std::cout << "Press any key to exit..." << std::endl;
+
+        if (_kbhit())
+        {
+            _getch(); // Clear any buffered input
+        }
+        _getch();
+
+        return -1;
+    }
+}
