@@ -1,17 +1,26 @@
 #include "car_game.h"
+#include <iomanip>  // for std::setw
 
 std::string getUsername()
 {
     std::string username;
 
-    // Display game title
-    std::cout << "=== F1 RACING GAME ===" << std::endl;
-    std::cout << "======================" << std::endl;
-    std::cout << std::endl;
+    system("cls");  // Clear screen
 
-    // Prompt for username input
-    std::cout << "Enter your username (no spaces): ";
+    std::cout << "*===========================================================================*" << std::endl;
+    std::cout << "|                               F1 RACING                                   |" << std::endl;
+    std::cout << "*===========================================================================*" << std::endl;
+    std::cout << "|                                                                           |" << std::endl;
+    std::cout << "|   Please enter your username to start the race!                           |" << std::endl;
+    std::cout << "|                                                                           |" << std::endl;
+    std::cout << "|   ______________________________                                          |" << std::endl;
+    std::cout << "|  | Username (no spaces):       |                                          |" << std::endl;
+    std::cout << "|  |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|                                          |" << std::endl;
+    std::cout << "|  | ";
     std::getline(std::cin, username);
+    std::cout << "|  |_____________________________|                                          |" << std::endl;
+    std::cout << "|                                                                           |" << std::endl;
+    std::cout << "*===========================================================================*" << std::endl;
 
     // Remove any non-alphanumeric characters
     username.erase(
@@ -25,7 +34,6 @@ std::string getUsername()
         username.end()
     );
 
-    // Fallback name if input is empty
     if (username.empty())
     {
         username = "Player";
@@ -34,60 +42,43 @@ std::string getUsername()
     return username;
 }
 
-int main() 
+int main()
 {
     try
     {
-		std::string username = getUsername(); // Get the username from the user
+        std::string username = getUsername(); // Get the username from the user
 
-        // Welcome screen
-        std::cout << std::endl;
-        std::cout << "Welcome, " << username << "!" << std::endl;
-        std::cout << std::endl;
+        // === DO NOT clear screen ===
+        // Show the rest of the welcome screen in continuation
 
-        // Game controls and instructions
-        std::cout << "Game Controls:" << std::endl;
-        std::cout << "A or Left Arrow  - Switch to Left Lane" << std::endl;
-        std::cout << "D or Right Arrow - Switch to Right Lane" << std::endl;
-        std::cout << "ESC - Exit Game" << std::endl;
-        std::cout << "R - Restart (when game over)" << std::endl;
-        std::cout << std::endl;
-        std::cout << "Objective: Avoid enemy cars by switching lanes!" << std::endl;
-        std::cout << "Difficulty increases every 25 seconds." << std::endl;
-        std::cout << std::endl;
-        std::cout << "The game will now switch to fullscreen mode." << std::endl;
-        std::cout << "Press any key to start..." << std::endl;
+        std::cout << "\n*===========================================================================*" << std::endl;
+        std::cout << "/                                                                           \\" << std::endl;
+        std::cout << "/                    *~~~~~~~~~~~~~~~~~~~~~~~*                              \\" << std::endl;
+        std::cout << "/                        Welcome, " << std::setw(37) << std::left << username << "     \\" << std::endl;
+        std::cout << "/                    *~~~~~~~~~~~~~~~~~~~~~~~*                              \\" << std::endl;
+        std::cout << "/                                                                           \\" << std::endl;
+        std::cout << "/  Objective: Avoid enemy cars by switching lanes.                          \\" << std::endl;
+        std::cout << "/                                                                           \\" << std::endl;
+        std::cout << "/==========================  Game Controls  ================================\\" << std::endl;
+        std::cout << "/   A or < Left Arrow   - Move to Left Lane                                 \\" << std::endl;
+        std::cout << "/   D or > Right Arrow  - Move to Right Lane                                \\" << std::endl;
+        std::cout << "/   ESC                 - Exit Game                                         \\" << std::endl;
+        std::cout << "/   R                   - Restart Game                                      \\" << std::endl;
+        std::cout << "/                                                                           \\" << std::endl;
+        std::cout << "/  Press any key to start...                                                \\" << std::endl;
+        std::cout << "*===========================================================================*" << std::endl;
 
-        // Wait for key press
-        if (_kbhit())
-        {
-            _getch(); // Clear any buffered input
-        }
-        _getch();
+        _getch(); // Wait for key press
 
-        // Start the game
-
-        TwoLaneCarGame game(username);
-        game.run();
-
-        return 0;
+        TwoLaneCarGame* game = new TwoLaneCarGame(username);
+        game->run();
+        delete game;
     }
-
-	// Catch any exceptions that may occur during game initialization or execution
-
     catch (const std::exception& e)
     {
         std::cerr << "Error: " << e.what() << std::endl;
-        std::cout << "Press any key to exit..." << std::endl;
-
-		// _kbhit` and `_getch` are used to wait for user input
-
-        if (_kbhit())
-        {
-            _getch(); // Clear any buffered input
-        }
-        _getch();
-
-        return -1;
+        return 1;
     }
+
+    return 0;
 }

@@ -166,15 +166,12 @@ void TwoLaneCarGame::drawUI()
     // LEFT PANEL TEXT (row -> text)
     // -------------------------------
     std::vector<std::pair<int, std::string>> leftTexts = {
-        {  1, "Game" },
-        {  3, "Score: " + std::to_string(score) },
-        {  5, "Time: " + std::to_string(seconds) + "s" },
-        {  7, "Level: " + std::to_string(difficultyLevel) },
-        {  9, "Control" },
-        { 11, "Left" },
-        { 12, "Right" },
-        { 15, "ESC - Exit" },
-        { 16, "R - Restart" }
+        {  6, "Game" },
+        {  8, "Score: " + std::to_string(score) },
+        {  10, "Time: " + std::to_string(seconds) + "s" },
+
+        { 14, "ESC - Exit" },
+        { 15, "R - Restart" }
     };
 
     // Render left panel lines inside the left panel width
@@ -197,16 +194,7 @@ void TwoLaneCarGame::drawUI()
     // RIGHT PANEL TEXT (row -> text)
     // -------------------------------
     std::vector<std::pair<int, std::string>> rightTexts = {
-        {  1, "Car" },
-        {  3, "Score" },
-        {  5, "Control" },
-        {  7, "A Key -" },
-        {  8, "D Key -" },
-        { 10, "Avoid cars" },
-        { 11, "by switching" },
-        { 12, "lanes!" },
-        { 15, "Speed up" },
-        { 16, "every 25s!" }
+        {  8, "Level: " + std::to_string(difficultyLevel) },
     };
 
     // Render right panel lines starting just to the right of ROAD_RIGHT border
@@ -252,14 +240,16 @@ void TwoLaneCarGame::drawGameOver()
 
     // Lines to display in the game-over overlay
     std::vector<std::string> text = {
-        "GAME OVER",
-        "",
-        "Cars Collided!",
-        "",
-        "Final Score: " + std::to_string(score),
-        "",
-        "Press R to Restart",
-        "Press ESC to Exit"
+        "|====================|",
+        "|     GAME OVER      |",
+        "|                    |",
+        "|   Cars Collided!   |",
+        "|                    |",
+        "Final Score:" + std::to_string(score),
+        "|--------------------|",
+        "| Press R to Restart |",
+        "| Press ESC to Exit  |",
+        "|====================|",
     };
 
     // Render each line centered horizontally, and vertically around centerY
