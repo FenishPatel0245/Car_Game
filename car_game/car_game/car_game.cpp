@@ -1,14 +1,6 @@
 #include "car_game.h"
 
 // ---------------------------
-// Car constructor
-// ---------------------------
-TwoLaneCarGame::Car::Car(int pLane, int py)
-    : lane(pLane), y(py), active(true)
-{
-}
-
-// ---------------------------
 // TwoLaneCarGame constructor
 // ---------------------------
 TwoLaneCarGame::TwoLaneCarGame(const std::string& user)
