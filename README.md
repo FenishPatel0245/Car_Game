@@ -289,3 +289,15 @@ File: car_game.cpp
       main.cpp
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------    
+
+Name:Fenish/Date:2025-08-06 :
+
+add demoMallocUsage for demonstrating dynamic memory allocation
+
+- Added a simple demoMallocUsage() function
+- Allocates space for 10 integers using malloc
+- Fills the array with dummy values (multiples of 10)
+- Frees the allocated memory using free()
+- Serves as a basic reference for manual memory management
+
+  File: main.cpp
