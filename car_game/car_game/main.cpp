@@ -8,7 +8,7 @@ std::string getUsername()
     system("cls");  // Clear screen
 
     std::cout << "*===========================================================================*" << std::endl;
-    std::cout << "|                               F1 RACING                                   |" << std::endl;
+    std::cout << "|                               HyperDrive_0                                |" << std::endl;
     std::cout << "*===========================================================================*" << std::endl;
     std::cout << "|                                                                           |" << std::endl;
     std::cout << "|   Please enter your username to start the race!                           |" << std::endl;
@@ -41,6 +41,26 @@ std::string getUsername()
 
     return username;
 }
+#include <cstdlib>  // For malloc and free
+
+void demoMallocUsage()
+{
+    // Allocate memory for 10 integers using malloc
+    int* tempScores = static_cast<int*>(malloc(10 * sizeof(int)));
+
+    if (tempScores != nullptr)
+    {
+        // Fill the array with dummy values
+        for (int i = 0; i < 10; ++i)
+        {
+            tempScores[i] = i * 10;
+        }
+
+        // Free the allocated memory
+        free(tempScores);
+    }
+}
+
 
 int main()
 {
@@ -79,6 +99,8 @@ int main()
         std::cerr << "Error: " << e.what() << std::endl;
         return 1;
     }
+
+    demoMallocUsage();
 
     return 0;
 }

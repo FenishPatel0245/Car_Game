@@ -166,7 +166,7 @@ void TwoLaneCarGame::drawUI()
     // LEFT PANEL TEXT (row -> text)
     // -------------------------------
     std::vector<std::pair<int, std::string>> leftTexts = {
-        {  6, "Game" },
+        {  6, "HyperDrive_0"},
         {  8, "Score: " + std::to_string(score) },
         {  10, "Time: " + std::to_string(seconds) + "s" },
 
