@@ -24,11 +24,18 @@ private:
     static const int SCREEN_HEIGHT = 30;
     static const int LEFT_PANEL_WIDTH = 20;
     static const int RIGHT_PANEL_WIDTH = 20;
+
     static const int ROAD_LEFT = LEFT_PANEL_WIDTH;
     static const int ROAD_RIGHT = SCREEN_WIDTH - RIGHT_PANEL_WIDTH;
-    static const int LANE_WIDTH = (ROAD_RIGHT - ROAD_LEFT) / 4;
+    static const int ROAD_WIDTH = ROAD_RIGHT - ROAD_LEFT;
+
+    //  Make lanes symmetrical with one central divider
+    static const int LANE_WIDTH = (ROAD_WIDTH - 1) / 2; // 39
+    static const int CENTER_LINE_X = ROAD_LEFT + LANE_WIDTH; // 20 + 39 = 59 (middle of screen)
+
+    //  Center of left and right lanes
     static const int LEFT_LANE_CENTER = ROAD_LEFT + LANE_WIDTH / 2;
-    static const int RIGHT_LANE_CENTER = ROAD_LEFT + LANE_WIDTH + LANE_WIDTH / 2;
+    static const int RIGHT_LANE_CENTER = CENTER_LINE_X + 1 + (LANE_WIDTH / 2);
 
     HANDLE hConsole;
     COORD dwCursorPosition;
